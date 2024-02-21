@@ -1,9 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsString, Min } from 'class-validator';
-import {
-  IsInterger,
-  OptionalProperty,
-} from 'src/_validators/validator.decorator';
+import { IsInterger, OptionalProperty } from 'src/_validators/input.validator';
 
 export class PaginatedQueryDto {
   @ApiProperty({ default: 1 })
