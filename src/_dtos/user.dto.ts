@@ -48,8 +48,4 @@ export class ChangeUserInfoDTO {
   @OptionalProperty()
   @IsInterger
   age: number;
-
-  @OptionalProperty()
-  @IsInterger
-  class: number;
 }
