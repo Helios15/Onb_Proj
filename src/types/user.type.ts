@@ -7,8 +7,14 @@ export interface GetListResponse<T> {
   age?: number;
 }
 
+export type UserNameType = {
+  first: string;
+  last: string;
+};
+
 export type FilterGetOptions = {
-  name?: string;
+  _id?: string;
+  name?: object;
   age?: number;
   isDeleted: boolean;
 };

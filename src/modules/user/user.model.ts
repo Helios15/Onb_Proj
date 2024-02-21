@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 export const User = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
-  name: { type: String, require: true },
+  name: { type: String, required: true },
   age: { type: Number },
   isDeleted: { type: Boolean, default: false },
 });

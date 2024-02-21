@@ -7,7 +7,8 @@ import {
   NewUserDTO,
 } from 'src/_dtos/user.dto';
 import { exclude } from 'src/utils/exclude';
-import { GetListResponse } from './../../types/user.type';
+import { diacriticSensitiveRegex } from 'src/utils/regex';
+import { FilterGetOptions, GetListResponse } from './../../types/user.type';
 import { User } from './user.model';
 
 @Injectable()
@@ -28,13 +29,17 @@ export class UserService {
   }
 
   async getUsers(payload: GetUsersDTO): Promise<GetListResponse<User>> {
-    const { page, limit } = payload;
-    const filterOptions = {
-      ...exclude(payload, ['page', 'limit']),
+    const { page, limit, name, age } = payload;
+    const filterOptions: FilterGetOptions = {
+      ...exclude(payload, ['page', 'limit', 'name']),
       isDeleted: false,
     };
-    const { name, age } = filterOptions;
-
+    if (name) {
+      filterOptions.name = {
+        $regex: diacriticSensitiveRegex(name),
+        $options: 'i',
+      };
+    }
     const [users, total] = await Promise.all([
       this.user
         .find(filterOptions)
